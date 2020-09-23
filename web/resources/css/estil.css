@@ -1066,6 +1066,7 @@ box-shadow: 0px 0px 10px 5px rgba(245,245,245,1);
 }
 .concardsPeditsSec{
     display: flex;
+    width: 100%;
 }
 .card_prod_dest_texSec22{
     font-size: 12px;
