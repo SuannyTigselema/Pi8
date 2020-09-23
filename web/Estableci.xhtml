@@ -2,9 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Facelet Title</title>
         <link rel="stylesheet" href="resources/css/estil.css"></link>
@@ -32,7 +32,7 @@
                     <a href="#" id="Add2cart"><i class="material-icons nav_header_busq_cart_cont_icon" style="font-size: 25px;">shopping_cart</i>
                     </a>
 
-                    <label for="Add2cart" class="nav_header_busq_cart_cont_lbl">Mi carrito</label>
+                    <a href="CarritoCompras.xhtml"> <label for="Add2cart" class="nav_header_busq_cart_cont_lbl">Mi carrito</label></a>
                 </div>
 
             </div>
@@ -63,12 +63,15 @@
         </div>
         <div class="prinplbRes" >   
             <h:form>
+                <ui:repeat var="p" value="#{vistaProducto.listap}"> 
+                
                 <div class="card_prod_dest" >
-                    <img src="img/arroz_marinero.jpg" class="card_prod_dest_img" alt=""/>
+                    <img src="#{p.imagenP}" class="card_prod_dest_img" alt=""/>
                     <div>
-                        <p class="card_prod_dest_titulo">Arroz Marinero</p>
+                        
+                        <p class="card_prod_dest_titulo">#{p.nombreP}</p>
                         <div class="card_prod_dest_sec">
-                            <p class="card_prod_dest_tipo_item">Nombre Restaurante</p>
+                            <p class="card_prod_dest_tipo_item">#{p.restauranteP}</p>
                             <div>
                                 <p:rating id="valorCalificacionReg" value="#{beanAnalisisCalificaciones.calificacionAnalisis.promedioInt}" readonly="true" />
 
@@ -76,20 +79,20 @@
                         </div>
 
                         <hr style=" border-top: 2px  rgb(217, 174, 138);"/>
-                        <p class="card_prod_dest_parrafo"> Lorem Ipsum is simply dummy text of the printing and         typesetting industry. Lorem Ipsum has 
-                            been the industry's standard dummy text ever since the 1500s, when an unknown printer took 
-                            a galley of type and scrambled it to make a type specimen book. </p>
+                        <p class="card_prod_dest_parrafo">#{p.descripcionP} </p>
                         <div class="card_prod_dest_sec2_prin">
                             <div class="card_prod_dest_sec2">
                                 <i class="material-icons " style="font-size: 25px; color:#FF9235;">attach_money</i>
-                                <p  class="card_prod_dest_texSec" style="font-size: 16px; margin-left: 0; font-weight: 600;">5,00 </p>
+                                <p  class="card_prod_dest_texSec" style="font-size: 16px; margin-left: 0; font-weight: 600;">#{p.precioP}</p>
 
                             </div>
-                            <button class="card_prod_dest_btn" style="margin-top: 10px;">Agregar al carrito</button>
+                            <p:commandButton value="AgregarCart" actionListener="#{vistaProducto.agregarCarrito()}"></p:commandButton>
+                           <!-- <button class="card_prod_dest_btn" style="margin-top: 10px;">Agregar al carrito</button>-->
                         </div>
 
                     </div>
                 </div>
+                    </ui:repeat>
             </h:form>
             <div class="tabs" style="top:110%; width: 80%; margin-bottom: 200px;">
                 <div class="tab-header">

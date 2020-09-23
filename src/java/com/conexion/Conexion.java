@@ -324,7 +324,7 @@ public class Conexion {
 
         try {
             Class.forName("org.postgresql.Driver");
-            connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/bdrestaurantes", "postgres", "123");
+                connection = DriverManager.getConnection("jdbc:postgresql://26.161.108.204:5432/pi8", "postgres", "Laturbina1997");
 
             statement = null;
             statement = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
@@ -398,8 +398,47 @@ public class Conexion {
         return ac;
     }
 
-    public List<Producto_Final> filtroTipoComidaPrecioMayorMenor(int i) 
-    {
+   // public List<Producto_Final> filtroTipoComidaPrecioMayorMenor(int i) 
+    //{
+
+    
+    public List<ControladorProducto> productosPerfil(int i, int res) {
+        List<ControladorProducto> listCalificaciones = new ArrayList();
+
+        try {
+            Class.forName("org.postgresql.Driver");
+                connection = DriverManager.getConnection("jdbc:postgresql://26.161.108.204:5432/pi8", "postgres", "Laturbina1997");
+                  //connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/dbFoodi", "postgres", "123");
+            statement = null;
+            statement = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            int n = 0;
+            ResultSet rs2 = statement.executeQuery("select p.id_producto as producid,a.foto,p.nombre as producto,m.nombre as establecimiento,  a.descripcion, a.precio from producto_final a inner join \n" +
+"producto p on p.id_producto = a.id_producto inner join establecimiento m \n" +
+"on m.id_establecimiento = a.id_establecimiento where p.id_producto="+i+" and m.id_establecimiento="+res+"");
+            while (rs2.next()) {
+                ControladorProducto c = new ControladorProducto();
+                c.setNombreP(rs2.getString("producto"));
+                c.setIdP(rs2.getString("producid"));
+                c.setDescripcionP(rs2.getString("descripcion"));
+                c.setImagenP(rs2.getString("foto"));
+                c.setRestauranteP(rs2.getString("establecimiento"));
+                c.setPrecioP(rs2.getString("precio"));
+                listCalificaciones.add(c);
+                n++;
+            }
+            rs2.close();
+            statement.close();
+            connection.close();
+        } catch (Exception e) {
+            String Exc = e.toString();
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        }
+
+       
+        return listCalificaciones;
+    }
+    
+    public List<Producto_Final> filtroTipoComidaPrecioMayorMenor(int i) {
         String fotof = "";
         String desc = "", nomb = "";
         List<Producto_Final> fotos = new ArrayList();
