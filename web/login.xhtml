@@ -18,7 +18,7 @@
                 <div class="logprinconSec2Sub1S">
                     <img src="resources/Imagenes/foodi_logo.png" class="Sec2Sub1Icon" alt=""/>
                     <a href="#" class="LogaRef">Iniciar Sesión</a>
-                    <a href="faces/RegistrarUsuario.xhtml" class="LogaRef">Registrarse</a>
+                    <a href="#" class="LogaRef">Registrarse</a>
                     <a href="#" class="LogaRef">Acerca de</a>
                 </div>  
                 <div>
@@ -33,17 +33,16 @@
                         </div>
                         <div style="text-align: center; justify-items: center;margin-right: 40px; ">
                             <img src="resources/Imagenes/foodi_logo.png" class="Sec2Sub1Icon" alt=""/>
-                            <p class="LogaRef2">Visualizar los restaurantes</p>
+                            <p class="LogaRef2">Ordena a domicilio</p>
                         </div>
                         <div style="text-align: center; justify-items: center;margin-right: 40px; ">
                             <img src="resources/Imagenes/foodi_logo.png" class="Sec2Sub1Icon" alt=""/>
-                            <p class="LogaRef2">Visualizar catalogo</p>
+                            <p class="LogaRef2">Ordena a domicilio</p>
                         </div>
                     </div>
                 </div>
             </div>
             <h:form>
-
                 <div class="logprinconSec2Sub2" style=" background-image: url(resources/Imagenes/Grupo%20226.png);">
                     <div style=" text-align: center;" >
                         <img src="resources/Imagenes/foodi_letras.png" class="logprinconSec2ImgF" alt=""/>
@@ -65,9 +64,10 @@
                         </div> 
                     </div>
                     <h:commandButton class="card_prod_dest_btn" style="margin: auto; margin-top: 20px;" value="INICIAR SESIÓN" action="#{ingresarLogin.conectar()}"/>
+                    <br/> 
+                    <h:messages style="margin-left: 100px;" errorStyle="color: red" infoStyle="color: green" globalOnly="true"/>
                 </div>
             </h:form>
-            <h:outputText value="#{ingresarLogin.usu}" />
         </div>
     </h:body>
 </html>
