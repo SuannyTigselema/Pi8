@@ -8,7 +8,9 @@ package com.conexion;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
-
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 /**
  *
  * @author JoseRene
@@ -19,7 +21,15 @@ public class IngresarLogin implements Serializable {
 
     
     private String usu,contra;
+    int id;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     public String getUsu() {
         return usu;
     }
@@ -38,17 +48,18 @@ public class IngresarLogin implements Serializable {
     
     public String conectar()
     {
-        Conexion con= new Conexion();
-        int id;
-        id=con.id(usu,contra);
-        if(id!=0){
-            
-           return "faces/inicio.xhtml";
+    Conexion con= new Conexion();
+        int idusu;
+        idusu=con.id(usu,hash.sha1(contra));        
+        if(idusu!=0){
+           this.id=idusu;
+           return "inicio.xhtml";
         }
         else{
-            System.err.println("No vale");
+            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario i/o contraseña invalidos ", null);
+            FacesContext.getCurrentInstance().addMessage(null, facesMsg);
         }
-        return "";
+         return "";
     }
     public String pb(){
          return "faces/RegistrarCliente.xhtml";
