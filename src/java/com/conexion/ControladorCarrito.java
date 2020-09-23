@@ -10,10 +10,26 @@ package com.conexion;
  * @author Cristhian
  */
 public class ControladorCarrito {
-     private String nombreP, imagenP, precioP,idP, restauranteP;
+     private String nombreP, imagenP, precioP,idP, restauranteP, cantidad, subtotal;
+
+    public String getSubtotal() {
+        return subtotal;
+    }
+
+    public void setSubtotal(String subtotal) {
+        this.subtotal = subtotal;
+    }
 
     public String getNombreP() {
         return nombreP;
+    }
+
+    public String getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(String cantidad) {
+        this.cantidad = cantidad;
     }
 
     public void setNombreP(String nombreP) {

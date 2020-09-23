@@ -101,9 +101,9 @@
 
                                             <!-- <button class="btnCantCart"> <i class="material-icons " style="font-size: 15px; color:#ffffff; margin-top: 1.5px;margin-left: -3px;">add</i></button>
                                           <p class="card_prod_dest_texSec222">2</p>-->
-                                            <p:inputNumber styleClass="card_prod_dest_texSec222" decimalPlaces="0" value="#{mostrarCarrito.cantidad}" >
-                                                <p:ajax event="keyup" listener="#{mostrarCarrito.cantidad}"></p:ajax>
-                                                <p:ajax event="keyup" listener="#{mostrarCarrito.subtotal}"></p:ajax>
+                                            <p:inputNumber styleClass="card_prod_dest_texSec222" decimalPlaces="0" value="#{p.cantidad}" >
+                                                <p:ajax event="keyup" listener="#{p.cantidad}"></p:ajax>
+                                                <p:ajax event="keyup" listener="#{p.subtotal}"></p:ajax>
                                                 <p:ajax event="keyup" listener="#{mostrarCarrito.total}"></p:ajax>
 
                                             </p:inputNumber>
@@ -121,12 +121,12 @@
                                     </div>
                                     <p style="margin: auto;color: #707070; margin-left: 0px; margin-right: 10px;">=</p>
                                     
-                                    <p:inputNumber styleClass="card_prod_dest_texSec2222"  placeholder="#{p.precioP}"  value="#{mostrarCarrito.subtotal}" >
+                                    <p:inputNumber styleClass="card_prod_dest_texSec2222"  placeholder="#{p.precioP}"  value="#{p.subtotal}" >
                                             </p:inputNumber>
                                     
                                      <h:commandButton class="btnCantCart2" value="X" >
                                                 <f:setPropertyActionListener value="#{p}" target="#{mostrarCarrito.conCartCl}"></f:setPropertyActionListener>
-                                                <p:ajax update="formkart"></p:ajax>
+                                                <p:ajax update="formkart for2"></p:ajax>
                                             </h:commandButton>
                                 </div>
                             </ui:repeat>

@@ -28,7 +28,7 @@ public class MostrarCarrito implements Serializable{
     private ControladorCarrito conCartCl;
     private ControladorCarrito conCart;
     private ControladorCarrito conCartless;
-    private String cantidad="1", subtotal, total;
+    private String subtotal, total;
     private float aux=0,aux2=0, precio=0; 
     
     public String getTotal() {
@@ -46,6 +46,13 @@ public class MostrarCarrito implements Serializable{
     public void setConCartCl(ControladorCarrito conCartCl) {
         this.conCartCl = conCartCl;
         listacarrito.remove(conCartCl);
+          listacarrito= new ArrayList<>();
+        listacarrito=vp.getListacarrito();
+        float aux3=0;
+        for (int i = 0; i < listacarrito.size(); i++) {
+            aux3= (Float.parseFloat(listacarrito.get(i).getPrecioP())*Float.parseFloat(listacarrito.get(i).getCantidad()))+aux3; 
+        }
+        setTotal(String.valueOf(aux3));
     }
    
     
@@ -55,14 +62,23 @@ public class MostrarCarrito implements Serializable{
 
     public void setConCartless(ControladorCarrito conCartless) {
         this.conCartless = conCartless;
-        
+        //conCartless.setCantidad(cantidad);
         if(aux>1){
-            aux= Float.parseFloat(cantidad)-1;
-            setCantidad(String.valueOf(Math.round(aux)));
+            aux= Float.parseFloat(conCartless.getCantidad())-1;
+            conCartless.setCantidad(String.valueOf(Math.round(aux)));
         }
-        aux2=Float.parseFloat(cantidad)*Float.parseFloat(conCartless.getPrecioP());
-         setSubtotal(String.valueOf(aux2));
-         setTotal(String.valueOf(aux2));
+        aux2=Float.parseFloat(conCartless.getCantidad())*Float.parseFloat(conCartless.getPrecioP());
+         conCart.setSubtotal(String.valueOf(aux2));
+
+         listacarrito= new ArrayList<>();
+        listacarrito=vp.getListacarrito();
+        float aux3=0;
+        for (int i = 0; i < listacarrito.size(); i++) {
+            aux3= (Float.parseFloat(listacarrito.get(i).getPrecioP())*Float.parseFloat(listacarrito.get(i).getCantidad()))+aux3; 
+        }
+        setTotal(String.valueOf(aux3));
+         
+         
     }
     
     public String getSubtotal() {
@@ -73,14 +89,6 @@ public class MostrarCarrito implements Serializable{
         this.subtotal = subtotal;
     }
     
-
-    public String getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(String cantidad) {
-        this.cantidad = cantidad;
-    }
     public ControladorCarrito getConCart() {
         return conCart;
     }
@@ -92,12 +100,21 @@ public class MostrarCarrito implements Serializable{
        // precio= Integer.parseInt( conCart.getPrecioP());
        // setCantidad(String.valueOf(Integer.parseInt(String.valueOf(aux))));
        // setSubtotal(String.valueOf(aux*precio));
-       aux= Float.parseFloat(cantidad)+1;
-        setCantidad(String.valueOf(Math.round(aux)));
+       aux= Float.parseFloat(conCart.getCantidad())+1;
+        conCart.setCantidad(String.valueOf(Math.round(aux)));
         
-        aux2=Float.parseFloat(cantidad)*Float.parseFloat(conCart.getPrecioP());
-         setSubtotal(String.valueOf(aux2));
-         setTotal(String.valueOf(aux2));
+        aux2=Float.parseFloat(conCart.getCantidad())*Float.parseFloat(conCart.getPrecioP());
+         conCart.setSubtotal(String.valueOf(aux2));
+        
+        
+         listacarrito= new ArrayList<>();
+        listacarrito=vp.getListacarrito();
+        float aux3=0;
+        for (int i = 0; i < listacarrito.size(); i++) {
+            aux3= (Float.parseFloat(listacarrito.get(i).getPrecioP())*Float.parseFloat(listacarrito.get(i).getCantidad()))+aux3; 
+        }
+        setTotal(String.valueOf(aux3));
+         
     }
     public List<ControladorCarrito> getListacarrito() {
         return listacarrito;
@@ -121,7 +138,11 @@ public class MostrarCarrito implements Serializable{
     public void init(){
         listacarrito= new ArrayList<>();
         listacarrito=vp.getListacarrito();
-       setTotal("0");
+        float aux3=0;
+        for (int i = 0; i < listacarrito.size(); i++) {
+            aux3= Float.parseFloat(listacarrito.get(i).getPrecioP())+aux3; 
+        }
+        setTotal(String.valueOf(aux3));
     }
     
 }

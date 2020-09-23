@@ -74,6 +74,7 @@ public class VistaProducto implements Serializable{
             listap.remove(i);
         }
         listap=con.productosPerfil(1, 2);
+        //listap=con.productosPerfil(10, 1);
     }
     
     public void agregarCarrito(){
@@ -83,8 +84,12 @@ public class VistaProducto implements Serializable{
         contCarrito.setNombreP(listap.get(0).getNombreP());
         contCarrito.setPrecioP(listap.get(0).getPrecioP());
         contCarrito.setRestauranteP(listap.get(0).getRestauranteP());
+        contCarrito.setCantidad("1");
+        contCarrito.setSubtotal(listap.get(0).getPrecioP());
         listac.add(contCarrito);
         listacarrito= listac;
+        Conexion con = new Conexion();
+        listap=con.productosPerfil(10, 1);
     }
     public VistaProducto() {
     }
