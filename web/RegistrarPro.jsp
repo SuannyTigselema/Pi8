@@ -147,7 +147,7 @@
                                 <label class="contInpT_lbl" for="txtRNombre" >Precio</label>
                                 <div class="contInpT_Sec2">
                                     <span class="contInpT_img material-icons">attach_money</span>
-                                    <input type="text" class="contInpT_txt" name="txtPrecio" id="txtPrecio" a:placeholder="0.00" required/>
+                                    <input type="number" step="any" class="contInpT_txt" name="txtPrecio" id="txtPrecio" a:placeholder="0.00" required/>
                                 </div> 
                             </div>
                         </div>

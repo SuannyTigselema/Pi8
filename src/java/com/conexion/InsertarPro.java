@@ -80,6 +80,7 @@ public class InsertarPro extends HttpServlet {
         String descripcion=request.getParameter("txtdescription");
         String nomarch=request.getParameter("nombre_archivo");
         InputStream entrada=archivo.getInputStream();
+        String ruta2="img/"+nomarch;
         String ruta="C:/mendoza-risco-bryan/Pi8/web/img/"+nomarch;
         File f= new File(ruta);
         FileOutputStream output= new FileOutputStream(f);
@@ -93,7 +94,7 @@ public class InsertarPro extends HttpServlet {
         Conexion con= new Conexion();
         int producto=con.producto(nombre);
         if(producto!=0){
-             con.insertar_productof(producto,2, descripcion,ruta,Integer.parseInt(tipopro) ,Double.valueOf(precio) , Integer.parseInt(chef) ,estado);
+             con.insertar_productof(producto,2, descripcion,ruta2,Integer.parseInt(tipopro) ,Double.valueOf(precio) , Integer.parseInt(chef) ,estado);
              out.println("<script>alert(\"Producto Registrado\"); </script>");
              request.getRequestDispatcher("RegistrarPro.jsp").forward(request, response);
         }else{
@@ -102,7 +103,7 @@ public class InsertarPro extends HttpServlet {
             if(ban){
                 producto=con.producto(nombre);
                 if(producto!=0){
-                    boolean ban2=con.insertar_productof(producto,2, descripcion,ruta,Integer.parseInt(tipopro) ,Double.valueOf(precio) , Integer.parseInt(chef) ,estado);
+                    boolean ban2=con.insertar_productof(producto,2, descripcion,ruta2,Integer.parseInt(tipopro) ,Double.valueOf(precio) , Integer.parseInt(chef) ,estado);
                     if(ban2){
                          out.println("<script>alert(\"Producto Registrado\"); </script>");
                          request.getRequestDispatcher("RegistrarPro.jsp").forward(request, response);
