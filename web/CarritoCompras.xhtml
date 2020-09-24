@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="resources/css/estilos.css"></link>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
               rel="stylesheet"/>
+
         <title>Carrito de compras</title>
     </h:head>
     <h:body style=" background-color: #F7F7F7;"> 
@@ -111,38 +112,52 @@
                                                 <f:setPropertyActionListener value="#{p}" target="#{mostrarCarrito.conCart}"></f:setPropertyActionListener>
                                                 <p:ajax update="formkart for2"></p:ajax>
                                             </h:commandButton>
-                                            
-                                           
 
-                                            
+
+
+
 
                                             <!-- <button class="btnCantCart"> <i class="material-icons " style="font-size: 15px; color:#ffffff; margin-top: 1.5px;margin-left: -3px;">remove</i></button>-->
                                         </div>
                                     </div>
                                     <p style="margin: auto;color: #707070; margin-left: 0px; margin-right: 10px;">=</p>
-                                    
+
                                     <p:inputNumber styleClass="card_prod_dest_texSec2222"  placeholder="#{p.precioP}"  value="#{p.subtotal}" >
-                                            </p:inputNumber>
-                                    
-                                     <h:commandButton class="btnCantCart2" value="X" >
-                                                <f:setPropertyActionListener value="#{p}" target="#{mostrarCarrito.conCartCl}"></f:setPropertyActionListener>
-                                                <p:ajax update="formkart for2"></p:ajax>
-                                            </h:commandButton>
+                                    </p:inputNumber>
+
+                                    <h:commandButton class="btnCantCart2" value="X" >
+                                        <f:setPropertyActionListener value="#{p}" target="#{mostrarCarrito.conCartCl}"></f:setPropertyActionListener>
+                                        <p:ajax update="formkart for2"></p:ajax>
+                                    </h:commandButton>
                                 </div>
                             </ui:repeat>
                         </h:form>
                     </div> 
                     <div style="width: 30%;">
-                        <div class="cards_minCart2">
-                            <h:form id="for2">
+                        <h:form id="for2">
+                            <div class="cards_minCart2">
+
                                 <div style="display: flex; justify-content: space-between;">
-                                <p class="carttotal" style="color:#262626;">Total:</p>
-                                <div class="carttotal" style="margin-left: 150px; font-style: italic; display: flex;" >$<input type="number" id="monto"  onchange="Pay()" disabled="true" value="#{mostrarCarrito.total}" class="cartvaluemont" /></div>
+                                    <p class="carttotal" style="color:#262626;">Total:</p>
+                                    <div class="carttotal" style="margin-left: 150px; font-style: italic; display: flex;" >$<input type="number" id="monto"  onchange="Pay()" disabled="true" value="#{mostrarCarrito.total}" class="cartvaluemont" /></div>
+
+                                </div>
+
+
 
                             </div>
-                            </h:form>
-                            
-                        </div>
+                            <div class="cards_minCart2">
+
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span class="contInpT_img material-icons">location_on</span>
+                                    <a href="#popup" class="contInpT_txt btn">Seleccione su ubicación</a>
+                                    
+                                </div>
+
+
+
+                            </div>
+                        </h:form>
                         <div class="cards_minCart2">
                             <div id="paypal-button-container" class="wrty"></div>
                         </div>
@@ -164,10 +179,32 @@
 
 
         </div>
+        
+        <h:form>
+        <div id="popup" class="popup">
+            <a href="#" class="close" style=" text-decoration: none;">&times;</a>
+            <div class="prinplbRes_tit" style="margin: 0;">
+                <div class="prinplbRes_tit_ci" ><span class="material-icons">location_on</span></div>
+                <div class="prinplbRes_tit_cont">Seleccione su ubicación</div>
+            </div>
+            <div id="map"></div>
+            
+            
+            <p:gmap center="#{MostrarCarrito.center_mapa}" zoom="12" type="ROADMAP" style=" height: 350px; width: 680px;"></p:gmap>
+            <button class="card_prod_dest_btnRes" style="margin-top: 10px;">GUARDAR</button>  
+        </div>
+        <a href="#" class="close-popup act" ></a>
+</h:form>
+
+
+  
+    
         <script
             src="https://www.paypal.com/sdk/js?client-id=AYkI84ClZeHfKRdIGWY8gv1xMi0936vz9bHWKac1yB2h76sVqTsVjk_whwuidBNNSgLnVU2dGTbBkjm2">
         </script>
-
+   <script 
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5MkIB5lNnQH1kC1tZ3ATeEsv7z66moKs">
+    </script>
         <script type="text/javascript" src="resources/js/pagos.js"></script>
     </h:body>
 </html>

@@ -175,6 +175,8 @@ background-color: #F7F7F7;
     color: #5D5D5D;
     font-size: 12px;
     line-height:20px;
+    min-width:  600px;
+    min-height: 30px;
     
 }
 .card_prod_dest_sec2{
@@ -210,9 +212,9 @@ background-color: #F7F7F7;
     background-color: #FEA621;
     border-style: none;
     height: 35px;
-    width: 120px;
+    width: 130px;
     border-radius: 8px;
-    color: #ffff;
+    color: #ffffff;
     align-items: center;
     justify-content: center;
     font-size: 12px;
@@ -871,8 +873,7 @@ input[type="file"] {
 
 .btn {
    border: 1px solid #ccc;
-    display: inline-block;
-    
+    display: inline-block; 
     cursor: pointer;
     width: 100%;
     margin-right: 20px;
