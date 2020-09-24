@@ -14,7 +14,39 @@ import java.io.Serializable;
 public class Producto_Final implements Serializable{
     
     
-    private String descripcion,foto,nombre;
+    private String descripcion,foto,nombre,tipo,producto,dinero,idproducto;
+
+    public String getIdproducto() {
+        return idproducto;
+    }
+
+    public void setIdproducto(String idproducto) {
+        this.idproducto = idproducto;
+    }
+
+    public String getDinero() {
+        return dinero;
+    }
+
+    public void setDinero(String dinero) {
+        this.dinero = dinero;
+    }
+
+    public String getProducto() {
+        return producto;
+    }
+
+    public void setProducto(String producto) {
+        this.producto = producto;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
 
     public String getNombre() {
         return nombre;

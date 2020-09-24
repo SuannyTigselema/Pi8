@@ -150,8 +150,8 @@
 
                                 <div style="display: flex; justify-content: space-between;">
                                     <span class="contInpT_img material-icons">location_on</span>
-                                    <a href="#popup" class="contInpT_txt btn">Seleccione su ubicación</a>
-                                    
+                                     <p:commandButton class="contInpT_txt btn" style="background-color: #ffffff" value="Seleccione su ubicación" type="button" onclick="PF('dlg2').show();" />
+
                                 </div>
 
 
@@ -179,32 +179,77 @@
 
 
         </div>
-        
-        <h:form>
-        <div id="popup" class="popup">
-            <a href="#" class="close" style=" text-decoration: none;">&times;</a>
-            <div class="prinplbRes_tit" style="margin: 0;">
-                <div class="prinplbRes_tit_ci" ><span class="material-icons">location_on</span></div>
-                <div class="prinplbRes_tit_cont">Seleccione su ubicación</div>
-            </div>
-            <div id="map"></div>
-            
-            
-            <p:gmap center="#{MostrarCarrito.center_mapa}" zoom="12" type="ROADMAP" style=" height: 350px; width: 680px;"></p:gmap>
-            <button class="card_prod_dest_btnRes" style="margin-top: 10px;">GUARDAR</button>  
-        </div>
-        <a href="#" class="close-popup act" ></a>
-</h:form>
 
 
-  
-    
+        <p:dialog header="Basic Dialog" widgetVar="dlg2" class="popup" height="auto">
+
+            <p:growl id="messages" showDetail="true" />
+
+            <p:gmap id="gmap" center="#{mostrarCarrito.center_mapa}" zoom="13" type="ROADTRIP" style="width:650px;height:400px"
+                    model="#{addMarkersView.emptyModel}" onPointClick="handlePointClick(event);" widgetVar="map" />
+            
+            <h:inputHidden id="lat" value="#{addMarkersView.lat}" />
+            <h:inputHidden id="lng" value="#{addMarkersView.lng}" />
+
+
+
+            <p:dialog widgetVar="dlg" showEffect="fade">
+                <h:form prependId="false">
+                    <h:panelGrid columns="2">
+                        <f:facet name="footer">
+
+                            <p:commandButton value="Cancel" onclick="return cancel()" />
+                        </f:facet>
+                    </h:panelGrid>
+
+
+                </h:form>
+            </p:dialog>
+
+        </p:dialog>
+
+
         <script
             src="https://www.paypal.com/sdk/js?client-id=AYkI84ClZeHfKRdIGWY8gv1xMi0936vz9bHWKac1yB2h76sVqTsVjk_whwuidBNNSgLnVU2dGTbBkjm2">
         </script>
-   <script 
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5MkIB5lNnQH1kC1tZ3ATeEsv7z66moKs">
-    </script>
+        <script type="text/javascript">
+            var currentMarker = null;
+
+            function handlePointClick(event) {
+                if (currentMarker === null) {
+                    document.getElementById('lat').value = event.latLng.lat();
+                    document.getElementById('lng').value = event.latLng.lng();
+
+                    currentMarker = new google.maps.Marker({
+                        position: new google.maps.LatLng(event.latLng.lat(), event.latLng.lng())
+                    });
+
+                    PF('map').addOverlay(currentMarker);
+
+                }
+            }
+
+            function markerAddComplete() {
+                var title = document.getElementById('title');
+                currentMarker.setTitle(title.value);
+                title.value = "";
+
+                currentMarker = null;
+                PF('dlg').hide();
+            }
+
+
+            function cancel() {
+                PF('dlg').hide();
+                currentMarker.setMap(null);
+                currentMarker = null;
+
+                return false;
+            }
+        </script>
+
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5MkIB5lNnQH1kC1tZ3ATeEsv7z66moKs"></script>
+
         <script type="text/javascript" src="resources/js/pagos.js"></script>
     </h:body>
 </html>

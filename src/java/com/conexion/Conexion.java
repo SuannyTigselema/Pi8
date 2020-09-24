@@ -208,6 +208,20 @@ public class Conexion {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
     }
+    
+    public void registrarPago(int calificacion, String comentario) {
+        String desc = "";
+        try {
+            ResultSet rs = statement.executeQuery("select insertarcomentario(" + calificacion + ",'" + comentario + "',1,1);");
+            rs.close();
+            statement.close();
+            connection.close();
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        }
+    }
+    
+    
 
     public List<CatalagoImagenes> fotosCatalogo(int i) {
         String fotof = "";
@@ -751,5 +765,152 @@ public class Conexion {
         }
          return resultado;  
        }
+        
+    public List<Controlador_reporte> reporte() {
+        String fotof = "";
+        String dir = "", nomb = "", idestablecimiento = "", idusuario = "", telefono = "", descr = "";
+        List<Controlador_reporte> fotos = new ArrayList();
+        int n = 0;
+        try {
+            ResultSet rs = statement.executeQuery("select id_establecimiento, id_usuario, nombre, direccion, telefono,descripcion, foto from establecimiento");
+            while (rs.next()) {
+                Controlador_reporte c = new Controlador_reporte();
+                fotof = rs.getString("foto");
+                dir = rs.getString("direccion");
+                nomb = rs.getString("nombre");
+                idestablecimiento = rs.getString("id_establecimiento");
+                idusuario = rs.getString("id_usuario");
+                telefono = rs.getString("telefono");
+                descr = rs.getString("descripcion");
+
+                c.setDescripcion(descr);
+                c.setDireccion(dir);
+                c.setFoto(fotof);
+                c.setId_establecimiento(idestablecimiento);
+                c.setId_usuario(idusuario);
+                c.setNombre(nomb);
+                c.setTelefono(telefono);
+                fotos.add(n, c);
+                n++;
+            }
+            rs.close();
+            statement.close();
+            connection.close();
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        }
+        return fotos;
+    }
+
+    public List<ControladorGraficar> graficar(int establecimiento) {
+        String nombre = "";
+        String id_establecimiento = "", puntaje = "";
+        List<ControladorGraficar> fotos = new ArrayList();
+        int n = 0;
+        try {
+            ResultSet rs = statement.executeQuery("select  pt.nombre,pf.id_establecimiento,sum(cl.calificacion) as Puntaje from producto_final pf \n"
+                    + "inner join calificacion cl on pf.id_producto_final=cl.id_producto_final\n"
+                    + "inner join producto pt on pt.id_producto=pf.id_producto\n"
+                    + "where pf.id_establecimiento=" + establecimiento + "\n"
+                    + "group by pt.nombre,pf.id_establecimiento\n"
+                    + "order by Puntaje desc\n"
+                    + "LIMIT 5");
+            while (rs.next()) {
+                ControladorGraficar c = new ControladorGraficar();
+                nombre = rs.getString("nombre");
+                id_establecimiento = rs.getString("id_establecimiento");
+                puntaje = rs.getString("Puntaje");
+
+                c.setId_establecimiento(id_establecimiento);
+                c.setNombre(nombre);
+                c.setPuntaje(puntaje);
+                fotos.add(n, c);
+                n++;
+            }
+            rs.close();
+            statement.close();
+            connection.close();
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        }
+        return fotos;
+    }
+
+    public List<ControladorGraficarEstablecimiento> graficarEstablecimiento(int establecimiento) {
+        String nombre = "";
+        String id_establecimiento = "", puntaje = "";
+        List<ControladorGraficarEstablecimiento> fotos = new ArrayList();
+        int n = 0;
+        try {
+            ResultSet rs = statement.executeQuery("select  pt.nombre,pf.id_establecimiento,sum(cl.calificacion) as Puntaje from producto_final pf \n"
+                    + "inner join calificacion cl on pf.id_producto_final=cl.id_producto_final\n"
+                    + "inner join producto pt on pt.id_producto=pf.id_producto\n"
+                    + "where pf.id_establecimiento=" + establecimiento + "\n"
+                    + "group by pt.nombre,pf.id_establecimiento\n"
+                    + "order by Puntaje desc\n"
+                    + "LIMIT 5");
+            while (rs.next()) {
+                ControladorGraficarEstablecimiento c = new ControladorGraficarEstablecimiento();
+                nombre = rs.getString("nombre");
+                id_establecimiento = rs.getString("id_establecimiento");
+                puntaje = rs.getString("Puntaje");
+
+                c.setId_establecimiento(id_establecimiento);
+                c.setNombre(nombre);
+                c.setPuntaje(puntaje);
+                fotos.add(n, c);
+                n++;
+            }
+            rs.close();
+            statement.close();
+            connection.close();
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        }
+        return fotos;
+    }
+
+    public List<Producto_Final> fotosProdcuto(int id, int tipo) {
+        String fotof = "";
+        String desc = "", nomb = "";
+        String tipoo = "",producto="",dinero="";
+        String idproducto="";
+        List<Producto_Final> fotos = new ArrayList();
+        int n = 0;
+        try {
+            ResultSet rs = statement.executeQuery("select p.id_producto_final, p.precio, p.id_tipo_producto,pr.nombre as producto,p.descripcion as descripcion, p.foto as foto, e.nombre as nombre from producto_final p\n"
+                    + "inner join establecimiento e on p.id_establecimiento=e.id_establecimiento inner join tipo_producto tp\n"
+                    + "on tp.id_tipo_producto=p.id_tipo_producto inner join producto pr on pr.id_producto=p.id_producto\n"
+                    + "where p.id_establecimiento="+id+" and p.id_tipo_producto="+tipo+"");
+            while (rs.next()) {
+                Producto_Final c = new Producto_Final();
+                fotof = rs.getString("foto");
+                desc = rs.getString("descripcion");
+                nomb = rs.getString("nombre");
+                producto=rs.getString("producto");
+                tipoo = rs.getString("id_tipo_producto");
+                dinero=rs.getString("precio");
+                idproducto=rs.getString("id_producto_final");
+                c.setDescripcion(desc);
+                c.setProducto(producto);
+                c.setFoto(fotof);
+                c.setNombre(nomb);
+                c.setTipo(tipoo);
+                c.setDinero(dinero);
+                c.setIdproducto(idproducto);
+                fotos.add(n, c);
+                n++;
+            }
+            rs.close();
+            statement.close();
+            connection.close();
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        }
+        return fotos;
+    }
+
+
+    
 
 }

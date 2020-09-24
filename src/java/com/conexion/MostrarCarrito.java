@@ -30,7 +30,7 @@ public class MostrarCarrito implements Serializable{
      * Creates a new instance of MostrarCarrito
      */
     private List<ControladorCarrito> listacarrito;
-    private VistaProducto vp;
+    private Producto vp;
     private ControladorCarrito conCartCl;
     private ControladorCarrito conCart;
     private ControladorCarrito conCartless;
@@ -189,13 +189,6 @@ public class MostrarCarrito implements Serializable{
         this.listacarrito = listacarrito;
     }
 
-    public VistaProducto getVp() {
-        return vp;
-    }
-
-    public void setVp(VistaProducto vp) {
-        this.vp = vp;
-    }
     public MostrarCarrito() {
     }
     
