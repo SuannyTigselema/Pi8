@@ -46,14 +46,26 @@ public class IngresarLogin implements Serializable {
         this.contra = contra;
     }
     
+    
+    private static int idusuarioFinal; 
+
+    public static int getIdusuarioFinal() {
+        return idusuarioFinal;
+    }
+
+    public static void setIdusuarioFinal(int idusuarioFinal) {
+        IngresarLogin.idusuarioFinal = idusuarioFinal;
+    }
+    
     public String conectar()
     {
     Conexion con= new Conexion();
         int idusu;
-        idusu=con.id(usu,hash.sha1(contra));        
+        idusu=con.id(usu,hash.sha1(contra));   
+        idusuarioFinal=idusu;
         if(idusu!=0){
            this.id=idusu;
-           return "inicio.xhtml";
+           return "inicioSt.xhtml";
         }
         else{
             FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario i/o contraseña invalidos ", null);

@@ -21,7 +21,7 @@ import weka.core.Instances;
  */
 public class Recomendacion {
     
-    public static double[][] recomendacion(ArrayList<Usuario> entrenamiento,ArrayList<Usuario> prueba)throws Exception {
+    public static double[] recomendacion(ArrayList<Usuario> entrenamiento,ArrayList<Usuario> prueba)throws Exception {
   
      double [] comidas= new double [entrenamiento.size()];
      double [] calificacion= new double[entrenamiento.size()];
@@ -116,10 +116,10 @@ public class Recomendacion {
                 establecimientosrecomender.add(String.valueOf(establecimientodesc[i]));
             }
         }
-           double[][] recomendacionfinal= new double[platosrecomender.size()][2];
+           double[] recomendacionfinal= new double[platosrecomender.size()];
            for (int j = 0; j < platosrecomender.size(); j++) {
-               recomendacionfinal[j][0]=Double.valueOf(platosrecomender.get(j));
-               recomendacionfinal[j][1]=Double.valueOf(establecimientosrecomender.get(j));
+               recomendacionfinal[j]=Double.valueOf(platosrecomender.get(j));
+               //recomendacionfinal[j][1]=Double.valueOf(establecimientosrecomender.get(j));
            }
   return recomendacionfinal;
  }

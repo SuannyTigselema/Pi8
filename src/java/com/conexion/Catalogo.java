@@ -24,7 +24,16 @@ public class Catalogo implements Serializable {
 
     List<CatalagoImagenes> imagenes = new ArrayList<>();
     private String imagen, descripcion, nombre, tipo, direccion;
+    private int calificacion;
 
+    public int getCalificacion() {
+        return calificacion;
+    }
+
+    public void setCalificacion(int calificacion) {
+        this.calificacion = calificacion;
+    }
+    
     public String getDireccion() {
         return direccion;
     }
@@ -79,6 +88,8 @@ public class Catalogo implements Serializable {
         tipo = con.tipoEstablecimiento(1);
         con = new Conexion();
         direccion = con.direccionEstablecimiento(1);
+        con=new Conexion();
+        calificacion=con.calificacionEstablecimiento(1);
 
     }
 

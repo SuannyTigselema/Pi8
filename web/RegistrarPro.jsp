@@ -119,7 +119,7 @@
                                     <span class="contInpT_img material-icons">bookmarks</span>
                                     <select name="cbbchef" class="select-css">
                                         <%
-                                        Conexion listaC = new Conexion();
+                                        Conexion listaC = new Conexion();                                        
                                         List<Chefs> listachefs=listaC.chefs(1);
                                         int idChef = 0;
                                         String nombres = "";
@@ -135,15 +135,6 @@
                                 </div> 
                             </div>
                             <div class="contInpT">
-                                <label class="contInpT_lbl" for="txtRNombre" >Estado</label>
-                                <div class="contInpT_Sec2">
-                                    <span class="contInpT_img material-icons">bookmarks</span>
-                                    <select name="cbbestado" class="select-css">
-                                        <option value="SI">Disponible</option>
-                                        <option value="No">No Disponible</option>
-                                    </select>
-                                </div> 
-                            </div><div class="contInpT">
                                 <label class="contInpT_lbl" for="txtRNombre" >Precio</label>
                                 <div class="contInpT_Sec2">
                                     <span class="contInpT_img material-icons">attach_money</span>
@@ -154,7 +145,7 @@
                          <div id="fotos" columns="1">
                             <div class="contPrinFrm_Sec1_in">
                                 <div class="contPrinFrmImgCargCon" >                          
-                                    <img id="imagenPrevisualizacion" class="contPrinFrmImgCarg"  src="img/alitas.jpg" alt="" />
+                                    <img id="imagenPrevisualizacion" class="contPrinFrmImgCarg" style="height: 120px;" src="img/alitas.jpg" alt="" />
                                 </div>
                                 <div class="contInpT">
                                     <label class="contInpT_lbl" for="txtRNombre" >Foto</label>
@@ -167,6 +158,16 @@
                                     </div>
 
                                 </div>
+                                <div class="contInpT">
+                                <label class="contInpT_lbl" for="txtRNombre" >Estado</label>
+                                <div class="contInpT_Sec2">
+                                    <span class="contInpT_img material-icons">bookmarks</span>
+                                    <select name="cbbestado" class="select-css">
+                                        <option value="SI">Disponible</option>
+                                        <option value="No">No Disponible</option>
+                                    </select>
+                                </div> 
+                            </div>
                             </div>
                          </div>
                     </div>

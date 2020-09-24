@@ -81,7 +81,7 @@ public class InsertarPro extends HttpServlet {
         String nomarch=request.getParameter("nombre_archivo");
         InputStream entrada=archivo.getInputStream();
         String ruta2="img/"+nomarch;
-        String ruta="C:/mendoza-risco-bryan/Pi8/web/img/"+nomarch;
+        String ruta="C:/Users/Cristhian/Documents/NetBeansProjects/Pi8/web/img/"+nomarch;
         File f= new File(ruta);
         FileOutputStream output= new FileOutputStream(f);
         int dato=entrada.read();

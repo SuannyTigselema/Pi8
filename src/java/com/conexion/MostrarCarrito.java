@@ -34,7 +34,15 @@ public class MostrarCarrito implements Serializable{
     private ControladorCarrito conCartCl;
     private ControladorCarrito conCart;
     private ControladorCarrito conCartless;
-    private String subtotal, total, center_mapa="-1.028453,-79.467503";
+    private String subtotal, total, center_mapa="-1.028453,-79.467503", cantidaditems;
+
+    public String getCantidaditems() {
+        return cantidaditems;
+    }
+
+    public void setCantidaditems(String cantidaditems) {
+        this.cantidaditems = cantidaditems;
+    }
     
     
      private MapModel emptyModel;
@@ -77,7 +85,8 @@ public class MostrarCarrito implements Serializable{
    public void addMarker() {
         Marker marker = new Marker(new LatLng(lat, lng));
         emptyModel.addOverlay(marker);
-          System.out.println("latitud: "+ lat +" ,Lng: "+lng);
+        
+         // System.out.println("latitud: "+ lat +" ,Lng: "+lng);
          // FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
                                    //     String.valueOf(getLat()),
                                     //     String.valueOf(getLng()));
@@ -118,6 +127,7 @@ public class MostrarCarrito implements Serializable{
             aux3= (Float.parseFloat(listacarrito.get(i).getPrecioP())*Float.parseFloat(listacarrito.get(i).getCantidad()))+aux3; 
         }
         setTotal(String.valueOf(aux3));
+        setCantidaditems(String.valueOf(listacarrito.size()));
     }
    
     
@@ -201,6 +211,18 @@ public class MostrarCarrito implements Serializable{
             aux3= Float.parseFloat(listacarrito.get(i).getPrecioP())+aux3; 
         }
         setTotal(String.valueOf(aux3));
+         setCantidaditems(String.valueOf(listacarrito.size()));
     }
     
+    public void registrarPago()
+    {
+      Conexion con = new Conexion();
+       listacarrito= new ArrayList<>();
+        listacarrito=vp.getListacarrito();
+        setCantidaditems(String.valueOf(listacarrito.size()));
+      con.registrarPago(1, 1, title, total, String.valueOf(lng), String.valueOf(lat));
+        for (int i = 0; i < listacarrito.size(); i++) {
+            con.registrarDetallePago(listacarrito.get(i).getIdP(), listacarrito.get(i).getCantidad(), listacarrito.get(i).getPrecioP(), "");
+        }
+    }
 }

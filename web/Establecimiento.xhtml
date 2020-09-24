@@ -28,13 +28,11 @@
                     <span class="material-icons nav_header_busq_icon">search</span>
                 </div>
                 <div class="nav_header_busq_cart_cont">
-                   <h:form id="formcant">
-                       <p class="item_num_cart" style="padding-left: 5px !important;">#{producto.cantidaditems}</p>
-                    </h:form>
+                    <p class="item_num_cart" style="padding-left: 8px;"> 0</p>
                     <a href="#" id="Add2cart"><i class="material-icons nav_header_busq_cart_cont_icon" style="font-size: 25px;">shopping_cart</i>
                     </a>
 
-                    <a href="CarritoCompras.xhtml" style="text-decoration: none;"> <label for="Add2cart" class="nav_header_busq_cart_cont_lbl">Mi carrito</label></a>
+                    <a href="CarritoCompras.xhtml"> <label for="Add2cart" class="nav_header_busq_cart_cont_lbl">Mi carrito</label></a>
                 </div>
 
             </div>
@@ -64,43 +62,46 @@
 
         </div>
         <div class="prinplbRes" >   
-            <h:form id="act">
-                    <div class="card_prod_dest" >
-                        <h:graphicImage class="card_prod_dest_img" value="#{producto.foto}"> </h:graphicImage>   
-                        <div>
-                            <p class="card_prod_dest_titulo">#{producto.producto}</p>
+            <h:form>
+                
+
+                    <div class="card_prod_dest" style="vertical-align: central;">
+                        <h:graphicImage value="#{beanEstablecimientoFinal.foto}" styleClass="card_prod_dest_img" style="  width: 750px;height: 200px;border-radius: 50px; margin-right: 40px;" ></h:graphicImage>
+
+                        <div style="width: 100%; margin-top: 20px;">
+                            <h:outputLabel class="card_prod_dest_titulo" value="#{beanEstablecimientoFinal.nombre}"></h:outputLabel>
                             <div class="card_prod_dest_sec">
-                                <a href="Establecimiento.xhtml" style="text-decoration: none;"> <p class="card_prod_dest_tipo_item">#{producto.nombrestaurante}</p></a>
+                                <h:outputLabel class="card_prod_dest_tipo_item" value="#{beanEstablecimientoFinal.categoria}" style="text-transform: capitalize;"></h:outputLabel>
+
                                 <div>
-                                    <p:rating id="valorCalificacionReg" value="#{beanAnalisisCalificaciones.calificacionAnalisis.promedioInt}" readonly="true" />
+                                  <!--  <p:rating id="valorCalificacionReg" value="" readonly="true" /> -->
 
                                 </div>
                             </div>
 
                             <hr style=" border-top: 2px  rgb(217, 174, 138);"/>
-                            <p class="card_prod_dest_parrafo"> #{producto.parrafo} </p>
+
+                            <p class="card_prod_dest_parrafo" style="width: 100%; min-height: 50px;">#{beanEstablecimientoFinal.descripcion}</p>
                             <div class="card_prod_dest_sec2_prin">
                                 <div class="card_prod_dest_sec2">
-                                    <i class="material-icons " style="font-size: 25px; color:#FF9235;">attach_money</i>
-                                    <p  class="card_prod_dest_texSec" style="font-size: 16px; margin-left: 0; font-weight: 600;">#{producto.dinero} </p>
+                                    <i class="material-icons " style="font-size: 25px; color:#BF0A19;">location_on</i>
 
+                                    <h:outputLabel class="card_prod_dest_texSec" value="#{beanEstablecimientoFinal.direccion}"></h:outputLabel>                                  
+                                    <i class="material-icons " style="font-size: 25px; color:#BF0A19; margin-left: 10px;">access_time</i>
+                                    <p class="card_prod_dest_texSec2">Abierto</p>
+                                    <p class="card_prod_dest_texSec">Horario de cierre 23:00</p> 
                                 </div>
-                                
-                                <p:commandButton class="card_prod_dest_btn" value="Agregar al carrito" update="formcant" actionListener="#{producto.agregarCarrito()}">
-                                      
-                                </p:commandButton>
-                               
                             </div>
-
                         </div>
                     </div>
-                </h:form>
+             
+            </h:form>
             <div class="tabs" style="top:110%; width: 80%; margin-bottom: 200px;">
                 <div class="tab-header">
                     <div class="divtab-header headerActive" style="display: flex; align-items: center;">
                         <span class="material-icons" style=" margin-right: 5px; margin-left: 55px;">
                             pending_actions
-                        </span> SIMILARES
+                        </span> MENÚ
                     </div>
                     <div class="divtab-header" style="display: flex; align-items: center;">
                         <span class="material-icons" style=" margin-right: 5px; margin-left: 55px;">
@@ -117,23 +118,21 @@
                     <div class="divTab bodyActive">
                         <div class="contcardsPedits">
                             <h:form id="filtrofoto">
-                                    <div  class="cont_cards_min" style="display: flex; flex-wrap: wrap; width: 100%; margin-left: 0; min-width: 800px;" >
-                                        <ui:repeat var="p" value="#{producto.imagenes}">  
-                                            <div class="cards_min" style="margin-bottom: 20px;">                                        
-                                                <h:graphicImage class="cards_min_img" value="#{p.foto}"> </h:graphicImage>                                        
-                                                <p class="cards_min_nombre">#{p.descripcion}</p>
-                                                <p class="cards_min_rest">#{p.nombre}</p> 
-                                                
-                                                <p:commandButton  class="cards_min_btn" value="Ver" update="act" >                                                       
-                                                    <f:setPropertyActionListener value="#{p}" target="#{producto.mostrar}" />
-                                                </p:commandButton>                                     
-                                            </div>
-                                        </ui:repeat>
-
-                                    </div>
-                                </h:form>
+                                <div  class="cont_cards_min" style="display: flex; flex-wrap: wrap; width: 100%; margin-left: 0; min-width: 800px;" >
+                                    <ui:repeat var="p" value="#{producto.productosEst}">  
+                                        <div class="cards_min" style="margin-bottom: 20px;">                                        
+                                            <h:graphicImage class="cards_min_img" value="#{p.foto}"> </h:graphicImage>                                        
+                                            <p class="cards_min_nombre">#{p.descripcion}</p>
+                                            <p class="cards_min_rest">#{p.nombre}</p>   
+                                            
+                                            <p:commandButton  class="cards_min_btn" value="Ver" action="#{producto.reidrigir()}">                                                       
+                                                <f:setPropertyActionListener value="#{p}" target="#{producto.mostrarAux}" />
+                                            </p:commandButton>                                               
+                                        </div>
+                                    </ui:repeat>
+                                </div>
+                            </h:form>
                         </div>
-
                     </div>
 
                     <div class="divTab">
@@ -150,23 +149,23 @@
                                         <h:form>
                                             <div style=" min-width: 100px;">
 
-                                                <p style="text-align: center;margin: auto; font-size: 50px; font-weight: 600; color: #7F7F7F">#{beanCalificaciones.calificacionAnalisis.promedio}</p>
+                                                <p style="text-align: center;margin: auto; font-size: 50px; font-weight: 600; color: #7F7F7F">#{beanCalificacionE.calificacionAnalisis.promedio}</p>
                                                 <div style="display: flex; margin-top: 10px; margin-bottom: 10px;">            
-                                                    <p:rating id="valorCalificacionReg" value="#{beanCalificaciones.calificacionAnalisis.promedioInt}" readonly="true" />
+                                                    <p:rating id="valorCalificacionReg" value="#{beanCalificacionE.calificacionAnalisis.promedioInt}" readonly="true" />
                                                 </div>
-                                                <p style="text-align: left;margin: auto; font-size: 16px; font-weight: 100; color: #7F7F7F">#{beanCalificaciones.calificacionAnalisis.numOpiniones}</p>
+                                                <p style="text-align: left;margin: auto; font-size: 16px; font-weight: 100; color: #7F7F7F">#{beanCalificacionE.calificacionAnalisis.numOpiniones}</p>
                                             </div>
 
                                         </h:form>
                                         <h:panelGroup id="panel" layout="blook">
-                                            <p:chart type="bar" model="#{beanCalificaciones.barModel}" style="width: 300px;height:200px; margin-left: 10px;" rendered="#{beanCalificaciones.barModel!=null}"/>
+                                            <p:chart type="bar" model="#{beanCalificacionE.barModel}" style="width: 300px;height:200px;" rendered="#{beanCalificacionE.barModel!=null}"/>
                                         </h:panelGroup>
                                     </div>
                                 </div>
 
                                 <div style="display: flex;">
                                     <div>
-                                        <ui:repeat var="c" value="#{beanCalificaciones.listCal}">  
+                                        <ui:repeat var="c" value="#{beanCalificacionE.listCal}">  
                                             <div style="margin-left: 30px; width: 300px;">
                                                 <div style="margin-top: 20px; margin-left: 15px;">
                                                     <h:outputLabel id="nombreUsuarioReg" value="#{c.nombreUsuario}" />
@@ -183,15 +182,15 @@
                                         </ui:repeat>
                                     </div>
 
-                                    <div style="margin-top: 60px; width: 250px;">
+                                    <div style="margin-top: 60px;">
                                         <p:inputText id="UsuarioActual" class="txtComentarioUser" style=" width: 200px;" disabled="true" value="Ronald:" />
-                                        <p:inputTextarea id="ComentarioActual" class="txtComentarioCom" style=" width: 200px;"  value="#{beanCalificaciones.comentario}"  placeholder="Escriba un comentario.."/>
+                                        <p:inputTextarea id="ComentarioActual" class="txtComentarioCom" style=" width: 200px;" value="#{beanCalificacionE.comentario}"  placeholder="Escriba un comentario.."/>
                                         <div style="display: flex; justify-content: space-around; max-width: 250px; margin-left: -40px;" >
 
                                             <p:growl id="messages" showDetail="true"/>
-                                            <p:rating id="ratingActual" value="#{beanCalificaciones.ratingcalificacion}">  
+                                            <p:rating id="ratingActual" value="#{beanCalificacionE.ratingcalificacion}">  
                                             </p:rating>
-                                            <p:commandButton class="card_prod_dest_btn" style="width: 90px;"  actionListener="#{beanCalificaciones.registrarCalificacion()}" update="frm" value="CALIFICAR">
+                                            <p:commandButton class="card_prod_dest_btn" style="width: 90px;"   actionListener="#{beanCalificacionE.registrarCalificacion()}" update="frm" value="CALIFICAR">
                                             </p:commandButton>
                                         </div>
                                     </div>
@@ -208,4 +207,5 @@
         <script type="text/javascript" src="resources/js/refe.js"></script>
     </h:body>
 </html>
+
 

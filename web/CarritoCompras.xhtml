@@ -31,11 +31,13 @@
                     <span class="material-icons nav_header_busq_icon">search</span>
                 </div>
                 <div class="nav_header_busq_cart_cont">
-                    <p class="item_num_cart">9+</p>
+                    <h:form id="frmcant">
+                        <p class="item_num_cart" style="padding-left: 5px !important;">#{mostrarCarrito.cantidaditems}</p>
+                    </h:form>
                     <a href="#" id="Add2cart"><i class="material-icons nav_header_busq_cart_cont_icon" style="font-size: 25px;">shopping_cart</i>
                     </a>
 
-                    <a href="CarritoCompras.xhtml"><label for="Add2cart" class="nav_header_busq_cart_cont_lbl">Mi carrito</label></a> 
+                    <a href="CarritoCompras.xhtml" style="text-decoration: none;"><label for="Add2cart" class="nav_header_busq_cart_cont_lbl">Mi carrito</label></a> 
                 </div>
 
             </div>
@@ -127,7 +129,7 @@
 
                                     <h:commandButton class="btnCantCart2" value="X" >
                                         <f:setPropertyActionListener value="#{p}" target="#{mostrarCarrito.conCartCl}"></f:setPropertyActionListener>
-                                        <p:ajax update="formkart for2"></p:ajax>
+                                        <p:ajax update="formkart for2 frmcant"></p:ajax>
                                     </h:commandButton>
                                 </div>
                             </ui:repeat>
@@ -150,7 +152,7 @@
 
                                 <div style="display: flex; justify-content: space-between;">
                                     <span class="contInpT_img material-icons">location_on</span>
-                                     <p:commandButton class="contInpT_txt btn" style="background-color: #ffffff" value="Seleccione su ubicación" type="button" onclick="PF('dlg2').show();" />
+                                    <p:commandButton class="contInpT_txt btn" style="background-color: #ffffff" value="Seleccione su ubicación" type="button" onclick="PF('dlg2').show();" />
 
                                 </div>
 
@@ -181,76 +183,77 @@
         </div>
 
 
-        <p:dialog header="Basic Dialog" widgetVar="dlg2" class="popup" height="auto">
+        <h:form prependId="false">
+            <p:dialog header="Basic Dialog" widgetVar="dlg2" class="popup" height="auto">
 
-            <p:growl id="messages" showDetail="true" />
+                <p:growl id="messages" showDetail="true" />
 
-            <p:gmap id="gmap" center="#{mostrarCarrito.center_mapa}" zoom="13" type="ROADTRIP" style="width:650px;height:400px"
-                    model="#{addMarkersView.emptyModel}" onPointClick="handlePointClick(event);" widgetVar="map" />
+                <p:gmap id="gmap" center="#{mostrarCarrito.center_mapa}" zoom="13" type="ROADTRIP" style="width:650px;height:400px"
+                        model="#{addMarkersView.emptyModel}" onPointClick="handlePointClick(event);" widgetVar="map" />
+               
+                <h:inputHidden id="lat" value="#{mostrarCarrito.lat}" />
+                    <h:inputHidden id="lng" value="#{mostrarCarrito.lng}" />
+
+                    <p:commandButton id="guardarbd" style="visibility: hidden;"  actionListener="#{mostrarCarrito.registrarPago()}"></p:commandButton>
             
-            <h:inputHidden id="lat" value="#{addMarkersView.lat}" />
-            <h:inputHidden id="lng" value="#{addMarkersView.lng}" />
+                <p:dialog widgetVar="dlg" showEffect="fade">
+                    
+                        <h:panelGrid columns="2">
+                            <f:facet name="footer">
+
+                                <p:commandButton value="Cancel" onclick="return cancel()" />
+                            </f:facet>
+                        </h:panelGrid>
 
 
+                
+                </p:dialog>
 
-            <p:dialog widgetVar="dlg" showEffect="fade">
-                <h:form prependId="false">
-                    <h:panelGrid columns="2">
-                        <f:facet name="footer">
-
-                            <p:commandButton value="Cancel" onclick="return cancel()" />
-                        </f:facet>
-                    </h:panelGrid>
-
-
-                </h:form>
             </p:dialog>
+</h:form>
 
-        </p:dialog>
+            <script
+                src="https://www.paypal.com/sdk/js?client-id=AYkI84ClZeHfKRdIGWY8gv1xMi0936vz9bHWKac1yB2h76sVqTsVjk_whwuidBNNSgLnVU2dGTbBkjm2">
+            </script>
+            <script type="text/javascript">
+                var currentMarker = null;
 
+                function handlePointClick(event) {
+                    if (currentMarker === null) {
+                        document.getElementById('lat').value = event.latLng.lat();
+                        document.getElementById('lng').value = event.latLng.lng();
 
-        <script
-            src="https://www.paypal.com/sdk/js?client-id=AYkI84ClZeHfKRdIGWY8gv1xMi0936vz9bHWKac1yB2h76sVqTsVjk_whwuidBNNSgLnVU2dGTbBkjm2">
-        </script>
-        <script type="text/javascript">
-            var currentMarker = null;
+                        currentMarker = new google.maps.Marker({
+                            position: new google.maps.LatLng(event.latLng.lat(), event.latLng.lng())
+                        });
 
-            function handlePointClick(event) {
-                if (currentMarker === null) {
-                    document.getElementById('lat').value = event.latLng.lat();
-                    document.getElementById('lng').value = event.latLng.lng();
+                        PF('map').addOverlay(currentMarker);
 
-                    currentMarker = new google.maps.Marker({
-                        position: new google.maps.LatLng(event.latLng.lat(), event.latLng.lng())
-                    });
-
-                    PF('map').addOverlay(currentMarker);
-
+                    }
                 }
-            }
 
-            function markerAddComplete() {
-                var title = document.getElementById('title');
-                currentMarker.setTitle(title.value);
-                title.value = "";
+                function markerAddComplete() {
+                    var title = document.getElementById('title');
+                    currentMarker.setTitle(title.value);
+                    title.value = "";
 
-                currentMarker = null;
-                PF('dlg').hide();
-            }
+                    currentMarker = null;
+                    PF('dlg').hide();
+                }
 
 
-            function cancel() {
-                PF('dlg').hide();
-                currentMarker.setMap(null);
-                currentMarker = null;
+                function cancel() {
+                    PF('dlg').hide();
+                    currentMarker.setMap(null);
+                    currentMarker = null;
 
-                return false;
-            }
-        </script>
+                    return false;
+                }
+            </script>
 
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5MkIB5lNnQH1kC1tZ3ATeEsv7z66moKs"></script>
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5MkIB5lNnQH1kC1tZ3ATeEsv7z66moKs"></script>
 
-        <script type="text/javascript" src="resources/js/pagos.js"></script>
+            <script type="text/javascript" src="resources/js/pagos.js"></script>
     </h:body>
 </html>
 

@@ -1,18 +1,21 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Inicio</title>
         <link rel="stylesheet" href="resources/css/estil.css"></link>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
               rel="stylesheet"/>
-            <link rel="stylesheet" href="resources/css/style.css"></link>
-            <link rel="stylesheet" href="resources/css/lightslider.css"></link>
-            <link rel="stylesheet" type="text/css" href="css/lightslider.css"/>
-            <!--Jquery--> 
-            <script type="text/javascript" src="resources/js/JQuery3.3.1.js"></script>
-            <script type="text/javascript" src="resources/js/lightslider.js"></script>
+        <link rel="stylesheet" href="resources/css/style.css"></link>
+        <link rel="stylesheet" href="resources/css/lightslider.css"></link>
+        <link rel="stylesheet" type="text/css" href="css/lightslider.css"/>
+        <!--Jquery--> 
+        <script type="text/javascript" src="resources/js/JQuery3.3.1.js"></script>
+        <script type="text/javascript" src="resources/js/lightslider.js"></script>
 
     </h:head>
     <h:body style="background-color: #F7F7F7;">
@@ -33,7 +36,7 @@
                         <span class="material-icons nav_header_busq_icon">search</span>
                     </div>
                     <div class="nav_header_busq_cart_cont">
-                        <p class="item_num_cart">9+</p>
+                        <p class="item_num_cart" style="padding-left: 8px;"> 0</p>
                         <a href="#" id="Add2cart"><i class="material-icons nav_header_busq_cart_cont_icon" style="font-size: 25px;">shopping_cart</i>
                         </a>
 
@@ -69,398 +72,167 @@
         </section>
 
 
+
+
+
+
+
+
         <div class="principalcm" style="background-color: #F7F7F7;"> 
-
             <div class="card_prod_dest" style="width: 80%;">
-                <img src="img/arroz_con_menestra.jpg" class="card_prod_dest_img" alt=""></img>
-                    <div style="width: 58%;">
-                        <p class="card_prod_dest_titulo">Parrilladas el Toro</p>
-                        <div class="card_prod_dest_sec">
-                            <p class="card_prod_dest_tipo_item">Asadero</p>
-                            <div>
-                                <i class="material-icons " style="font-size: 20px; color: #FF9235;">star</i>
-                                <i class="material-icons " style="font-size: 20px;color: #FF9235;">star</i>
-                                <i class="material-icons " style="font-size: 20px;color: #FF9235;">star</i>
-                                <i class="material-icons " style="font-size: 20px;color: #FF9235;">star</i>
-                                <i class="material-icons " style="font-size: 20px;color: #FF9235;">star_half</i>
-                            </div>
+                <img src="#{beansugerencia.foto}" class="card_prod_dest_img" alt=""></img>
+                <div style="width: 58%;">
+                    <p class="card_prod_dest_titulo">#{beansugerencia.nombre}</p>
+                    <div class="card_prod_dest_sec">
+                        <p class="card_prod_dest_tipo_item">#{beansugerencia.categoria}</p>
+                        <div>
+                            <i class="material-icons " style="font-size: 20px; color: #FF9235;">star</i>
+                            <i class="material-icons " style="font-size: 20px;color: #FF9235;">star</i>
+                            <i class="material-icons " style="font-size: 20px;color: #FF9235;">star</i>
+                            <i class="material-icons " style="font-size: 20px;color: #FF9235;">star</i>
+                            <i class="material-icons " style="font-size: 20px;color: #FF9235;">star_half</i>
                         </div>
-
-                        <hr style=" border-top: 2px  rgb(217, 174, 138);"/>
-                        <p class="card_prod_dest_parrafo" style=" min-width: 720px; min-height: 30px;"> Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-                            <div class="card_prod_dest_sec2_prin">
-                                <div class="card_prod_dest_sec2">
-                                    <i class="material-icons " style="font-size: 25px; color:#BF0A19;">location_on</i>
-                                    <p  class="card_prod_dest_texSec">9 de Octubre, Esmeraldas  |</p>
-                                    <i class="material-icons " style="font-size: 25px; color:#BF0A19; margin-left: 10px;">access_time</i>
-                                    <p class="card_prod_dest_texSec2">Abierto</p>
-                                    <p class="card_prod_dest_texSec">Horario de cierre 23:00</p> 
-                                </div>
-                                <button class="card_prod_dest_btn" style="width: 130px;">VER MENÚ</button>
-                            </div>
-
                     </div>
 
+                    <hr style=" border-top: 2px  rgb(217, 174, 138);"/>
+                    <p class="card_prod_dest_parrafo" style=" min-width: 720px; min-height: 30px;"> #{beansugerencia.descripcion} </p>
+                    <div class="card_prod_dest_sec2_prin">
+                        <div class="card_prod_dest_sec2">
+                            <i class="material-icons " style="font-size: 25px; color:#BF0A19;">location_on</i>
+                            <p  class="card_prod_dest_texSec">#{beansugerencia.direccion}</p>
+                            <i class="material-icons " style="font-size: 25px; color:#BF0A19; margin-left: 10px;">access_time</i>
+                            <p class="card_prod_dest_texSec2">Abierto</p>
+                            <p class="card_prod_dest_texSec">Horario de cierre 23:00</p> 
+                        </div>
+                        <button class="card_prod_dest_btn" style="width: 130px;">VER MENÚ</button>
+                    </div>
+
+                </div>
+
             </div>
-
-
-
-
         </div>
 
+
+
+
+
+
+
+       
+
+
+
+
         <section style="margin-top: 320px; background-color: #F7F7F7;">
-            <div style="display: flex; background-color: #F7F7F7;">
-                <div class="card_prod_dest_tipo_itemSec" ><i class="material-icons " style="font-size: 20px;color: #F7F7F7; margin-right: 10px;">trending_up</i>Populares</div>
-            </div>
-            <div class="containerCards" style="width: 80%; background-color: #F7F7F7;">
-                <!--slider-->
-                <ul id="autoWidth" class="cs-hidden" style="background-color: #F7F7F7;">
-                    <!--1-->
-                    <li class="item-a" style="background-color: #F7F7F7;">
-                        <!--slider-box-->
-                        <div class="box">
-                            <div class="cards_min">
-                                <img src="img/bollo.jpg"  class="cards_min_img" alt=""/>
-                                    <p class="cards_min_nombre">Papas fritas</p>
-                                    <p class="cards_min_rest">Restaurante la española</p>
-                                    <button class="cards_min_btn">PEDIR</button>
-                            </div>
-
-                        </div>
-                    </li>
-                    <!--2-->
-                    <li class="item-a">
-                        <!--slider-box-->
-                        <div class="box">
-                            <div class="cards_min">
-                                 <img src="img/bollo.jpg"  class="cards_min_img" alt=""/>
-                                    <p class="cards_min_nombre">Arroz con menestra</p>
-                                    <p class="cards_min_rest">Restaurante la española</p>
-                                    <button class="cards_min_btn">PEDIR</button>
-                            </div>
-
-                        </div>
-                    </li>
-                    <!--3-->
-                    <li class="item-a">
-                        <!--slider-box-->
-                        <div class="box">
-                            <div class="cards_min">
-                                <img src="img/bollo.jpg"  class="cards_min_img" alt=""/>
-                                    <p class="cards_min_nombre">Arroz marinero</p>
-                                    <p class="cards_min_rest">Restaurante la española</p>
-                                    <button class="cards_min_btn">PEDIR</button>
-                            </div>
-
-                        </div>
-                    </li>
-                    <!--4-->
-                    <li class="item-a">
-                        <!--slider-box-->
-                        <div class="box">
-                            <div class="cards_min">
-                                <img src="img/bollo.jpg"  class="cards_min_img" alt=""/>
-                                    <p class="cards_min_nombre">Carne apanada</p>
-                                    <p class="cards_min_rest">Restaurante la española</p>
-                                    <button class="cards_min_btn">PEDIR</button>
-                            </div>
-
-                        </div>
-                    </li>
-                    <!--5-->
-                    <li class="item-a">
-                        <!--slider-box-->
-                        <div class="box">
-                            <div class="cards_min">
-                                <img src="img/bollo.jpg"  class="cards_min_img" alt=""/>
-                                    <p class="cards_min_nombre">Encebollado</p>
-                                    <p class="cards_min_rest">Restaurante la española</p>
-                                    <button class="cards_min_btn">PEDIR</button>
-                            </div>
-
-                        </div>
-                    </li>
-                    <!--6-->
-                    <li class="item-a">
-                        <!--slider-box-->
-                        <div class="box">
-                            <div class="cards_min">
-                                 <img src="img/bollo.jpg"  class="cards_min_img" alt=""/>
-                                    <p class="cards_min_nombre">Moro lenteja</p>
-                                    <p class="cards_min_rest">Restaurante la española</p>
-                                    <button class="cards_min_btn">PEDIR</button>
-                            </div>
-
-                        </div>
-                    </li>
-                    <!--7-->
-                    <li class="item-a">
-                        <!--slider-box-->
-                        <div class="box">
-                            <div class="cards_min">
-                                 <img src="img/bollo.jpg"  class="cards_min_img" alt=""/>
-                                    <p class="cards_min_nombre">Sopa de pato</p>
-                                    <p class="cards_min_rest">Restaurante la española</p>
-                                    <button class="cards_min_btn">PEDIR</button>
-                            </div>
-
-                        </div>
-                    </li>
-                    <!--8-->
-                    <li class="item-a">
-                        <!--slider-box-->
-                        <div class="box">
-                            <div class="cards_min">
-                               <img src="img/bollo.jpg"  class="cards_min_img" alt=""/>
-                                    <p class="cards_min_nombre">Sopa de pato</p>
-                                    <p class="cards_min_rest">Restaurante la española</p>
-                                    <button class="cards_min_btn">PEDIR</button>
-                            </div>
-
-                        </div>
-                    </li>
-                </ul>
-
-
-
-
-            </div>
-        </section>
-
-
-        <section style="margin-top: 20px; background-color: #F7F7F7;">
             <div style="display: flex;">
                 <div class="card_prod_dest_tipo_itemSec" ><i class="material-icons " style="font-size: 20px;color: #F7F7F7; margin-right: 10px;">trending_up</i>Recomendados</div>
             </div>
-            <div class="containerCards" style="width: 80%; background-color: #F7F7F7; ">
-                <!--slider-->
-                <ul id="autoWidth2" class="cs-hidden">
-                    <!--1-->
-                    <li class="item-a">
-                        <!--slider-box-->
-                        <div class="box">
-                            <div class="cards_min">
-                                <img src="img/bollo.jpg"  class="cards_min_img" alt=""/>
-                                    <p class="cards_min_nombre">Sopa de pato</p>
-                                    <p class="cards_min_rest">Restaurante la española</p>
-                                    <button class="cards_min_btn">PEDIR</button>
-                            </div>
 
-                        </div>
-                    </li>
-                    <!--2-->
-                    <li class="item-a">
-                        <!--slider-box-->
-                        <div class="box">
-                            <div class="cards_min">
-                                <img src="img/bollo.jpg"  class="cards_min_img" alt=""/>
-                                    <p class="cards_min_nombre">Sopa de pato</p>
-                                    <p class="cards_min_rest">Restaurante la española</p>
-                                    <button class="cards_min_btn">PEDIR</button>
-                            </div>
-
-                        </div>
-                    </li>
-                    <!--3-->
-                    <li class="item-a">
-                        <!--slider-box-->
-                        <div class="box">
-                            <div class="cards_min">
-                                <img src="img/bollo.jpg"  class="cards_min_img" alt=""/>
-                                    <p class="cards_min_nombre">Sopa de pato</p>
-                                    <p class="cards_min_rest">Restaurante la española</p>
-                                    <button class="cards_min_btn">PEDIR</button>
-                            </div>
-
-                        </div>
-                    </li>
-                    <!--4-->
-                    <li class="item-a">
-                        <!--slider-box-->
-                        <div class="box">
-                            <div class="cards_min">
-                                <img src="img/bollo.jpg"  class="cards_min_img" alt=""/>
-                                    <p class="cards_min_nombre">Sopa de pato</p>
-                                    <p class="cards_min_rest">Restaurante la española</p>
-                                    <button class="cards_min_btn">PEDIR</button>
-                            </div>
-
-                        </div>
-                    </li>
-                    <!--5-->
-                    <li class="item-a">
-                        <!--slider-box-->
-                        <div class="box">
-                            <div class="cards_min">
-                                 <img src="img/bollo.jpg"  class="cards_min_img" alt=""/>
-                                    <p class="cards_min_nombre">Sopa de pato</p>
-                                    <p class="cards_min_rest">Restaurante la española</p>
-                                    <button class="cards_min_btn">PEDIR</button>
-                            </div>
-
-                        </div>
-                    </li>
-                    <!--6-->
-                    <li class="item-a">
-                        <!--slider-box-->
-                        <div class="box">
-                            <div class="cards_min">
-                                <img src="img/bollo.jpg"  class="cards_min_img" alt=""/>
-                                    <p class="cards_min_nombre">Sopa de pato</p>
-                                    <p class="cards_min_rest">Restaurante la española</p>
-                                    <button class="cards_min_btn">PEDIR</button>
-                            </div>
-
-                        </div>
-                    </li>
-                    <!--7-->
-                    <li class="item-a">
-                        <!--slider-box-->
-                        <div class="box">
-                            <div class="cards_min">
-                                 <img src="img/bollo.jpg"  class="cards_min_img" alt=""/>
-                                    <p class="cards_min_nombre">Sopa de pato</p>
-                                    <p class="cards_min_rest">Restaurante la española</p>
-                                    <button class="cards_min_btn">PEDIR</button>
-
-                            </div>
-
-                        </div>
-                    </li>
-                    <!--8-->
-                    <li class="item-a">
-                        <!--slider-box-->
-                        <div class="box">
-                            <div class="cards_min">
-                                <img src="img/bollo.jpg"  class="cards_min_img" alt=""/>
-                                    <p class="cards_min_nombre">Sopa de pato</p>
-                                    <p class="cards_min_rest">Restaurante la española</p>
-                                    <button class="cards_min_btn">PEDIR</button>
-                            </div>
-
-                        </div>
-                    </li>
-                </ul>
+            <h:form>
 
 
+                <div class="containerCards" style="width: 80%; background-color: #F7F7F7; ">
+                    <!--slider-->
+                    <ul id="autoWidth2" class="cs-hidden">
+                        <!--1-->
+                        <ui:repeat var="p" value="#{beansugerencia.sugerienciaspopularesfinales}" >
+                            <li class="item-a">
+                                <!--slider-box-->
+                                <div class="box">
+                                    <div class="cards_min">
+                                        <img src="#{p.foto}"  class="cards_min_img" alt=""/>
+                                        <p class="cards_min_nombre" style=" width: 100%; margin: auto; text-align: center; margin-top: 5px; margin-bottom: 5px;">#{p.nombre}</p>
+                                        <p class="cards_min_rest" style="text-align: center; margin-bottom: 5px; text-transform: capitalize !important;">#{p.establecimiento}</p>
+                                        <p:commandButton class="cards_min_btn" value="Ver" action="#{beansugerencia.cambiar()}">                                            
+                                            <f:setPropertyActionListener value="#{p}" target="#{beansugerencia.popufinal}" />
+                                        </p:commandButton>
+                                    </div>
 
+                                </div>
+                            </li>  
+                        </ui:repeat>
+                    </ul>
+                </div>
 
-            </div>
+            </h:form>
         </section>
 
 
         <section style="margin-top: 20px; background-color: #F7F7F7;">
             <div style="display: flex;">
+                <div class="card_prod_dest_tipo_itemSec" ><i class="material-icons " style="font-size: 20px;color: #F7F7F7; margin-right: 10px;">trending_up</i>Nuevos</div>
+            </div>
+
+
+
+
+            <h:form>
+
+                <div class="containerCards" style="width: 80%; background-color: #F7F7F7;">
+                    <!--slider-->
+
+                    <ul id="autoWidth3" class="cs-hidden">
+                        <!--1-->
+                        <ui:repeat var="p" value="#{beansugerencia.sugerirultimos}" >
+                            <li class="item-a">
+                                <!--slider-box-->
+
+                                <div class="box">
+                                    <div class="cards_min">
+                                        <img src="#{p.foto}"  class="cards_min_img" alt=""/>
+                                        <p class="cards_min_nombre" style=" width: 100%; margin: auto; text-align: center; margin-top: 5px; margin-bottom: 5px;">#{p.nombre}</p>
+                                       <p class="cards_min_rest" style="text-align: center; margin-bottom: 5px; text-transform: capitalize !important;">#{p.establecimiento}</p>
+                                        <p:commandButton class="cards_min_btn" value="Ver" action="#{beansugerencia.cambiar()}">                                            
+                                            <f:setPropertyActionListener value="#{p}" target="#{beansugerencia.ultimosugerir}" />
+                                        </p:commandButton>
+                                    </div>
+                                </div>
+
+                            </li>
+                        </ui:repeat>
+                        <!--2-->                  
+                    </ul>
+
+                </div>
+
+            </h:form>
+        </section>
+        
+         <section style="margin-top: 20px; background-color: #F7F7F7;">
+            <div style="display: flex; background-color: #F7F7F7;">
                 <div class="card_prod_dest_tipo_itemSec" ><i class="material-icons " style="font-size: 20px;color: #F7F7F7; margin-right: 10px;">trending_up</i>Populares</div>
             </div>
-            <div class="containerCards" style="width: 80%; background-color: #F7F7F7;">
-                <!--slider-->
-                <ul id="autoWidth3" class="cs-hidden">
-                    <!--1-->
-                    <li class="item-a">
-                        <!--slider-box-->
-                        <div class="box">
-                            <div class="cards_min">
-                                 <img src="img/bollo.jpg"  class="cards_min_img" alt=""/>
-                                    <p class="cards_min_nombre">Papas fritas</p>
-                                    <p class="cards_min_rest">Restaurante la española</p>
-                                    <button class="cards_min_btn">PEDIR</button>
-                            </div>
-                        </div>
-                    </li>
-                    <!--2-->
-                    <li class="item-a">
-                        <!--slider-box-->
-                        <div class="box">
-                            <div class="cards_min">
-                                <img src="img/bollo.jpg"  class="cards_min_img" alt=""/>
-                                    <p class="cards_min_nombre">Arroz marinero</p>
-                                    <p class="cards_min_rest">Restaurante la española</p>
-                                    <button class="cards_min_btn">PEDIR</button>
-                            </div>
-                        </div>
-                    </li>
-                    <!--3-->
-                    <li class="item-a">
-                        <!--slider-box-->
-                        <div class="box">
-                            <div class="cards_min">
-                                <img src="img/bollo.jpg"  class="cards_min_img" alt=""/>
-                                    <p class="cards_min_nombre">Carne apanada</p>
-                                    <p class="cards_min_rest">Restaurante la española</p>
-                                    <button class="cards_min_btn">PEDIR</button>
-                            </div>
-                        </div>
-                    </li>
-                    <!--4-->
-                    <li class="item-a">
-                        <!--slider-box-->
-                        <div class="box">
-                            <div class="cards_min">
-                                <img src="img/bollo.jpg"  class="cards_min_img" alt=""/>
-                                    <p class="cards_min_nombre">Encebollado</p>
-                                    <p class="cards_min_rest">Restaurante la española</p>
-                                    <button class="cards_min_btn">PEDIR</button>
-                            </div>
-                        </div>
-                    </li>
-                    <!--5-->
-                    <li class="item-a">
-                        <!--slider-box-->
-                        <div class="box">
-                            <div class="cards_min">
-                                <img src="img/bollo.jpg"  class="cards_min_img" alt=""/>
-                                    <p class="cards_min_nombre">Moro lenteja</p>
-                                    <p class="cards_min_rest">Restaurante la española</p>
-                                    <button class="cards_min_btn">PEDIR</button>
-                            </div>
-                        </div>
-                    </li>
-                    <!--6-->
-                    <li class="item-a">
-                        <!--slider-box-->
-                        <div class="box">
-                            <div class="cards_min">
-                                <img src="img/bollo.jpg"  class="cards_min_img" alt=""/>
-                                    <p class="cards_min_nombre">Sopa de pato</p>
-                                    <p class="cards_min_rest">Restaurante la española</p>
-                                    <button class="cards_min_btn">PEDIR</button>
-                            </div>
-                        </div>
-                    </li>
-                    <!--7-->
-                    <li class="item-a">
-                        <!--slider-box-->
-                        <div class="box">
-                            <div class="cards_min">
-                                 <img src="img/bollo.jpg"  class="cards_min_img" alt=""/>
-                                    <p class="cards_min_nombre">Sopa de pato</p>
-                                    <p class="cards_min_rest">Restaurante la española</p>
-                                    <button class="cards_min_btn">PEDIR</button>
-                            </div>
-                        </div>
-                    </li>
-                    <!--8-->
-                    <li class="item-a">
-                        <!--slider-box-->
-                        <div class="box">
-                            <div class="cards_min">
-                                <img src="img/bollo.jpg"  class="cards_min_img" alt=""/>
-                                    <p class="cards_min_nombre">Sopa de pato</p>
-                                    <p class="cards_min_rest">Restaurante la española</p>
-                                    <button class="cards_min_btn">PEDIR</button>
-                            </div>
-
-                        </div>
-                    </li>
-                </ul>
 
 
+            <h:form>
 
+                <div class="containerCards" style="width: 80%; background-color: #F7F7F7;">
+                    <!--slider-->
+                    <ul id="autoWidth" class="cs-hidden" style="background-color: #F7F7F7;">
+                        <!--1-->
+                        <ui:repeat var="p" value="#{beansugerencia.sugerircategorias}" >
+                            <li class="item-a" style="background-color: #F7F7F7;">
+                                <!--slider-box-->
+                                <div class="box">
+                                    <div class="cards_min">
+                                        <img src="#{p.foto}"  class="cards_min_img" alt=""/>
+                                        <p class="cards_min_nombre" style=" width: 100%; margin: auto; text-align: center; margin-top: 5px; margin-bottom: 5px;">#{p.nombre}</p>
+                                        <p class="cards_min_rest" style="text-align: center; margin-bottom: 5px; text-transform: capitalize !important;">#{p.establecimiento}</p>
+                                        
+                                        <p:commandButton class="cards_min_btn" value="Ver" action="#{beansugerencia.cambiar()}">                                            
+                                            <f:setPropertyActionListener value="#{p}" target="#{beansugerencia.controlc}" />
+                                        </p:commandButton>                                                                               
+                                    </div>
+                                </div>
+                            </li> 
+                        </ui:repeat>
+                    </ul>
+                </div>
 
-            </div>
+            </h:form>
         </section>
-         <script type="text/javascript" src="resources/js/script.js"></script>
+        <script type="text/javascript" src="resources/js/script.js"></script>
     </h:body>
 </html>
+
 

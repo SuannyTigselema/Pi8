@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -28,6 +28,15 @@ public class Producto implements Serializable {
 
     private static String auxTipo;
     private static String auxPrecio;
+    private String cantidaditems = "0";
+
+    public String getCantidaditems() {
+        return cantidaditems;
+    }
+
+    public void setCantidaditems(String cantidaditems) {
+        this.cantidaditems = cantidaditems;
+    }
 
     public static String getAuxPrecio() {
         return auxPrecio;
@@ -46,6 +55,20 @@ public class Producto implements Serializable {
     }
 
     List<Producto_Final> imagenes = new ArrayList<>();
+    List<Producto_Final> productosEst = new ArrayList<>();
+
+    
+    public List<Producto_Final> getProductosEst() {
+        Conexion con = new Conexion();
+        
+        Beansugerencia sg=new Beansugerencia();
+        
+       return con.ProductoPorEst(Integer.parseInt(sg.getIdestablecimientofinal()));
+    }
+
+    public void setProductosEst(List<Producto_Final> productosEst) {
+        this.productosEst = productosEst;
+    }
 
     private String tipo_producto, precio;
 
@@ -97,8 +120,7 @@ public class Producto implements Serializable {
 
     }
 
-    
-    private String producto,nombrestaurante,parrafo,foto,dinero;
+    private String producto, nombrestaurante, parrafo, foto, dinero;
 
     public String getDinero() {
         return dinero;
@@ -139,6 +161,32 @@ public class Producto implements Serializable {
     public void setParrafo(String parrafo) {
         this.parrafo = parrafo;
     }
+
+    
+    
+    
+    public String reidrigir()
+    {        
+        return "Producto";
+    }
+    
+    
+    private Producto_Final mostrarAux;
+
+    public Producto_Final getMostrarAux() {
+        return mostrarAux;
+    }
+
+    public void setMostrarAux(Producto_Final mostrarAux) {
+        this.mostrarAux = mostrarAux;
+        
+        Beansugerencia sug = new Beansugerencia();
+
+        sug.setNombrefinalin(mostrarAux.getProducto());
+        sug.setTipo_produto_final(mostrarAux.getTipo());
+      
+    }
+    
     
     
     
@@ -149,17 +197,16 @@ public class Producto implements Serializable {
     }
 
     public void setMostrar(Producto_Final mostrar) {
-        this.mostrar = mostrar; 
-        this.idproducto=mostrar.getIdproducto();
-        this.dinero=mostrar.getDinero();
-        this.producto=mostrar.getProducto();
-        this.nombrestaurante=mostrar.getNombre();
-        this.tipo_producto=mostrar.getTipo();
-        this.parrafo=mostrar.getDescripcion();
-        this.foto=mostrar.getFoto();                      
+        this.mostrar = mostrar;
+        this.idproducto = mostrar.getIdproducto();
+        this.dinero = mostrar.getDinero();
+        this.producto = mostrar.getProducto();
+        this.nombrestaurante = mostrar.getNombre();
+        this.tipo_producto = mostrar.getTipo();
+        this.parrafo = mostrar.getDescripcion();
+        this.foto = mostrar.getFoto();
     }
-    
-    
+
     public List<Producto_Final> getImagenes() {
         return imagenes;
     }
@@ -168,7 +215,7 @@ public class Producto implements Serializable {
         this.imagenes = imagenes;
     }
 
-    private String idproducto; 
+    private String idproducto;
 
     public String getIdproducto() {
         return idproducto;
@@ -177,27 +224,39 @@ public class Producto implements Serializable {
     public void setIdproducto(String idproducto) {
         this.idproducto = idproducto;
     }
-    
-    
+
     @PostConstruct
     public void init() {
+
+        String obtener = "";
         Conexion con = new Conexion();
-        imagenes = con.fotosProdcuto(1,1);
-        idproducto=imagenes.get(0).getIdproducto();
-        dinero=imagenes.get(0).getDinero();
-        producto=imagenes.get(0).getProducto();
-        nombrestaurante=imagenes.get(0).getNombre();
-        tipo_producto=imagenes.get(0).getTipo();
-        parrafo=imagenes.get(0).getDescripcion();
-        foto=imagenes.get(0).getFoto();        
+
+        Beansugerencia sug = new Beansugerencia();
+
+        obtener = sug.getNombrefinalin();
+
+        imagenes = con.fotosProdcuto(Integer.parseInt(sug.getIdestablecimientofinal()), Integer.parseInt(sug.getTipo_produto_final()));
+
+        for (int i = 0; i < imagenes.size(); i++) {
+
+            if (obtener.equals(imagenes.get(i).getProducto())) {
+                idproducto = imagenes.get(i).getIdproducto();
+                dinero = imagenes.get(i).getDinero();
+                producto = imagenes.get(i).getProducto();
+                nombrestaurante = imagenes.get(i).getNombre();
+                tipo_producto = imagenes.get(i).getTipo();
+                parrafo = imagenes.get(i).getDescripcion();
+                foto = imagenes.get(i).getFoto();
+                setCantidaditems("0");
+            }
+        }
     }
 
     public Producto() {
     }
 
-    
     private ControladorCarrito contCarrito;
-    private List<ControladorCarrito> listac =new ArrayList<>();
+    private List<ControladorCarrito> listac = new ArrayList<>();
 
     public List<ControladorCarrito> getListac() {
         return listac;
@@ -214,8 +273,8 @@ public class Producto implements Serializable {
     public void setContCarrito(ControladorCarrito contCarrito) {
         this.contCarrito = contCarrito;
     }
-    
-    private static List<ControladorCarrito> listacarrito =new ArrayList<>();
+
+    private static List<ControladorCarrito> listacarrito = new ArrayList<>();
 
     public static List<ControladorCarrito> getListacarrito() {
         return listacarrito;
@@ -225,13 +284,9 @@ public class Producto implements Serializable {
         Producto.listacarrito = listacarrito;
     }
 
-            
-    public void agregarCarrito(){
-        
-        
-        
-        
-        contCarrito= new ControladorCarrito();
+    public void agregarCarrito() {
+
+        contCarrito = new ControladorCarrito();
         contCarrito.setIdP(idproducto);
         contCarrito.setImagenP(foto);
         contCarrito.setNombreP(producto);
@@ -240,9 +295,10 @@ public class Producto implements Serializable {
         contCarrito.setCantidad("1");
         contCarrito.setSubtotal(dinero);
         listac.add(contCarrito);
-        listacarrito= listac;
+        listacarrito = listac;
         //Conexion con = new Conexion();
         //listap=con.productosPerfil(10, 1);
+        setCantidaditems(String.valueOf(listacarrito.size()));
     }
-    
+
 }
